@@ -70,3 +70,32 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(90deg, var(--tw-gradient-stops));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+:root {
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+}
+
+.bg-mainBg {
+  /*background-image: url('/images/Colorfull background.png'); */
+  background-image: url('/images/Black background.png'); 
+  background-size: cover;
+  background-position: center;
+  transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
+  transition: transform 0.1s ease-out; /* Suaviza la animación */
+}
+
+.bg-offer1{
+  background-image: url('/images/BackgroundOffer_1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
