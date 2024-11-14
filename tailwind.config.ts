@@ -8,9 +8,21 @@ export default {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    fontSize: {
+    'h2-title': ['40px',{ fontWeight: 'bold'}],
+    'h3-with-subtitle': ['36px',{fontWeight: 'bold'}],
+    'h5-title': ['18px', { fontWeight: 'bold'}],
+    'subtitle': '16px',
+    'bold-text': ['15px', {fontWeight: 'bold'}],
+    'normal-text': '15px',
+    'small-text': '13px',
+    'ultra-small-text': '12px'
+    },
   	extend: {
   		colors: {
-  			background: 'hsl(var(--background))',
+  			background: '#17171A',
+        grayBackground: '#2E2E33',
+         'orange-to-pink-gradient': 'linear-gradient(90deg, #FF9900 0%, #FF00EE 100%)',
   			foreground: 'hsl(var(--foreground))',
   			card: {
   				DEFAULT: 'hsl(var(--card))',
