@@ -85,8 +85,8 @@ body {
 }
 
 .bg-mainBg {
-  background-image: url('/images/Colorfull background.png'); 
-  /*background-image: url('/images/Black background.png'); */
+  /*background-image: url('/images/Colorfull background.png'); */
+  background-image: url('/images/Black background.png'); 
   background-size: cover;
   background-position: center;
   transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
