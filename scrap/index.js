@@ -1,4 +1,5 @@
 const playwright = require("playwright");
+const fs = require('fs');
 
 (async () => {
   try {
@@ -41,7 +42,7 @@ const playwright = require("playwright");
 
       nfts.push(nft);
     }
-    fs.writeFileSync("/scrap/nfts.json", JSON.stringify(nfts, null, 2));
+    fs.writeFileSync("nfts.json", JSON.stringify(nfts, null, 2));
 
     await browser.close();
     console.log(nfts);

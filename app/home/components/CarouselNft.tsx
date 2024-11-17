@@ -9,8 +9,7 @@ export default function CarouselNft({ nftUrl, title, description, status = "Vent
         <div className="">
           <div className="w-[500px] h-[500px] rounded-2xl bg-center bg-cover"
             style={{ backgroundImage: `url('${nftUrl}')` }}
-          >
-          </div>
+          > </div>
         </div>
         <div className="flex justify-center items-center  px-4">
           <div className="flex flex-col gap-4 w-[55ch]">
