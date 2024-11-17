@@ -50,7 +50,9 @@ export default function Page() {
         </CarouselContent>
       </Carousel>
     </div>
+    <section id="Community">
       <Community />
+    </section>
     </div>
   </main>)
 }
