@@ -22,6 +22,7 @@ export default {
   		colors: {
   			background: '#17171A',
         grayBackground: '#2E2E33',
+				customGray: '#AEAEAE',
          'orange-to-pink-gradient': 'linear-gradient(90deg, #FF9900 0%, #FF00EE 100%)',
   			foreground: 'hsl(var(--foreground))',
   			card: {
