@@ -50,18 +50,6 @@ export default function Navbar({
           >
             Home
           </p>
-          <a
-          href="#Community"
-          onClick={(e) => {
-            e.preventDefault();
-            handleNavigation("/home", "Community");
-          }}
-            className={`text-white  hover:opacity-100 transition-colors  cursor-pointer ${
-              activeItem == "Community" ? "opacity-100" : "opacity-55"
-            }`}
-          >
-            Community
-          </a>
           <p
             className={`text-white  hover:opacity-100 transition-colors  cursor-pointer ${
               activeItem == "Profile" ? "opacity-100" : "opacity-55"
@@ -69,6 +57,14 @@ export default function Navbar({
             onClick={() => router.push("/profile")}
           >
             Profile
+          </p>
+          <p
+            className={`text-white  hover:opacity-100 transition-colors  cursor-pointer ${
+              activeItem == "Create" ? "opacity-100" : "opacity-55"
+            }`}
+            onClick={() => router.push("/create")}
+          >
+            Create
           </p>
         </div>
         <div className="flex gap-4 ">
