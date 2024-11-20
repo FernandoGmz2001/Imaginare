@@ -7,15 +7,15 @@ import NftForm from "./components/NftForm";
 
 export default function CreateNft() {
   return (
-    <main className="px-10 min-h-screen">
-      <Navbar hasBackground={false} activeItem="Create" />
+    <main className="px-10 pb-10 min-h-screen">
+      <Navbar hasBackground activeItem="Create" />
       <div className="w-full h-full flex flex-col items-center justify-center pt-8">
         <div className="">
           <div className="mb-4">
             <h2 className="text-h2-title text-white">Create New NFT</h2>
           </div>
           <div className="flex gap-8">
-            <div className="text-white dark flex flex-col gap-6">
+            <div className="text-white dark flex flex-col gap-6 w-4/6">
               <Tabs defaultValue="generator" className="">
                 <TabsList>
                   <TabsTrigger value="generator">Generator</TabsTrigger>

@@ -12,11 +12,11 @@ export default function Input16() {
         </span>
         <Input
           id="input-16"
-          className="pl-10 rounded-e-none ps-6 shadow-none bg-grayBackground"
+          className="pl-10 rounded-e-none shadow-none bg-grayBackground"
           placeholder="0.00"
           type="number"
         />
-        <span className="-z-10 inline-flex items-center rounded-e-lg border border-input bg-grayPlaceholder text-white px-3 text-sm text-muted-foreground">
+        <span className="inline-flex items-center rounded-e-lg border border-input bg-grayPlaceholder text-white px-3 text-sm text-muted-foreground">
           ETH
         </span>
       </div>
