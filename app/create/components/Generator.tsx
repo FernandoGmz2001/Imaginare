@@ -1,15 +1,18 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-import { useState, ChangeEvent, FormEvent  } from "react";
+import { useState, ChangeEvent, FormEvent, useContext  } from "react";
 import { FaArrowUp } from "react-icons/fa6";
 import { LuLoader2 } from "react-icons/lu";
+import { useImageContext } from "../layout";
 
 export default function Generator() {
   const [prompt, setPrompt] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { imageObj, setImageObj } = useImageContext();
+
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPrompt(e.target.value);
@@ -30,7 +33,6 @@ export default function Generator() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Api-Key': 'YOUR_API_KEY' // Añade tu clave de API aquí
         },
         body: JSON.stringify({
           text: `${prompt}. Estilo pixel art 8 bit.`,
@@ -46,7 +48,11 @@ export default function Generator() {
       }
 
       const data = await response.json();
+      setImageObj({
+        url: data.ImageUrl,
+      })
       setImgUrl(data.imageUrl);
+
     } catch (err : any) {
       console.error(err);
       setError(err.message);
