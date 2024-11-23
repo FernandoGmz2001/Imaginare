@@ -8,10 +8,11 @@ type NftObject = {
   description: string;
   author?: string;
 };
+
 // Definir el tipo del contexto para tipar `imageObj` y `setImageObj`
 type ImageContextType = {
-  imageObj: NftObject; // Puedes especificar el tipo exacto si lo conoces
-  setImageObj: React.Dispatch<React.SetStateAction<object>>;
+  imageObj: NftObject;
+  setImageObj: React.Dispatch<React.SetStateAction<NftObject>>;
 };
 
 // Crear el contexto
@@ -23,7 +24,11 @@ export default function CreateLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [imageObj, setImageObj] = useState<object>({url: '', name: '', description: '', author:''});
+  const [imageObj, setImageObj] = useState<NftObject>({
+    url: "",
+    name: "",
+    description: "",
+  });
 
   return (
     <ImageContext.Provider value={{ imageObj, setImageObj }}>

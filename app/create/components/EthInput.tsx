@@ -1,8 +1,20 @@
 import { FaEthereum } from "react-icons/fa";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
+import { useImageContext } from "../layout";
 
 export default function Input16() {
+  const { imageObj, setImageObj } = useImageContext();
+
+
+  const handleChange = ( e: any ) => {
+    const { name , value } = e.target
+    setImageObj((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  }
   return (
     <div className="space-y-2">
       <Label htmlFor="input-16">Price</Label>
@@ -12,9 +24,11 @@ export default function Input16() {
         </span>
         <Input
           id="input-16"
+          name="price"
           className="pl-10 rounded-e-none shadow-none bg-grayBackground"
           placeholder="0.00"
           type="number"
+          onChange={handleChange}
         />
         <span className="inline-flex items-center rounded-e-lg border border-input bg-grayPlaceholder text-white px-3 text-sm text-muted-foreground">
           ETH

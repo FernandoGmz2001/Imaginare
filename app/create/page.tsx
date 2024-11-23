@@ -1,14 +1,16 @@
+'use client'
 import Navbar from "../components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Generator from "./components/Generator";
-import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
 import NftForm from "./components/NftForm";
-import NftCard from "@/app/components/NftCard"
+import NftCard from "@/app/components/NftCard";
 import { useImageContext } from "./layout";
 
 export default function CreateNft() {
-  const { imageObj, setImageObj } = useImageContext()
+  const { imageObj } = useImageContext();
+
+  console.log("imageObj in CreateNft:", imageObj);
+
   return (
     <main className="px-10 pb-10 min-h-screen">
       <Navbar hasBackground activeItem="Create" />
@@ -38,8 +40,13 @@ export default function CreateNft() {
             </div>
             <div>
               <p className="text-h5-title text-white">Preview</p>
-              <NftCard url={imageObj.url} />
-              <div className="w-[300px] h-[300px] bg-grayBackground rounded-xl"></div>
+              <div className="w-[400px]">
+                <NftCard
+                  url={imageObj.url}
+                  author="Fernando Gomez"
+                  title={imageObj.name}
+                />
+              </div>
             </div>
           </div>
         </div>

@@ -8,12 +8,21 @@ import { FormEvent, useState } from "react";
 
 export default function NftForm() {
   const { imageObj, setImageObj } = useImageContext();
-  const [ imgName, setImgName ] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
+    console.log(imageObj)
     e.preventDefault();
-    setImageObj({...imageObj,name: imgName, description: '', author: ''})
+
   };
+
+  const handleChange = ( e: any ) => {
+    const { name , value } = e.target
+    setImageObj((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    console.log(imageObj)
+  }
 
   return (
     <>
@@ -25,9 +34,10 @@ export default function NftForm() {
           <Input
             type="text"
             id="name"
+            name="name"
             placeholder="Name"
             className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
-            onChange={(e)=> setImgName(e.target.value)}
+            onChange={handleChange}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -36,16 +46,18 @@ export default function NftForm() {
           </Label>
           <Input
             type="text"
+            name="description"
             id="description"
             placeholder="Description"
             className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
+            onChange={handleChange}
           />
         </div>
         <div>
           <EthInput />
         </div>
         <div>
-          <Button className="bg-white text-black font-semibold">Create</Button>
+          <Button className="bg-white text-black font-semibold" type="submit">Create</Button>
         </div>
       </form>
     </>
