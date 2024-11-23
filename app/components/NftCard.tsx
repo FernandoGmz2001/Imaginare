@@ -1,4 +1,15 @@
 import { MdVerified } from "react-icons/md";
+import { HiDotsVertical } from "react-icons/hi";
+import { MdModeEdit, MdDelete } from "react-icons/md";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 type CommunityCardProps = {
   url?: string;
@@ -7,9 +18,27 @@ type CommunityCardProps = {
   price?: string;
 };
 
-export default function CommunityCard({ url, author, title, price }: CommunityCardProps) {
+export default function CommunityCard({
+  url,
+  author,
+  title,
+  price,
+}: CommunityCardProps) {
   return (
     <div className="relative border-1 border-white rounded-xl h-[400px] overflow-hidden group cursor-pointer">
+      <div className="absolute right-1 text-white top-4 z-10 dark">
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <HiDotsVertical />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem><MdModeEdit />Edit</DropdownMenuItem>
+            <DropdownMenuItem><MdDelete />Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transform transition-transform duration-500 group-hover:scale-110"
         style={{ backgroundImage: `url(${url})` }}

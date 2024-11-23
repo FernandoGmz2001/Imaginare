@@ -5,6 +5,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+
 import NftCard from '@/app/components/NftCard'
 import nfts from '@/nfts.json'
 
