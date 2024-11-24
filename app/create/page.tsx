@@ -5,6 +5,7 @@ import Generator from "./components/Generator";
 import NftForm from "./components/NftForm";
 import NftCard from "@/app/components/NftCard";
 import { useImageContext } from "./layout";
+import FileInput from "./components/FileInput"
 
 export default function CreateNft() {
   const { imageObj } = useImageContext();
@@ -32,8 +33,11 @@ export default function CreateNft() {
                 >
                   <Generator />
                 </TabsContent>
-                <TabsContent value="upload">
-                  Change your password here.
+                <TabsContent
+                  value="upload"
+                  className="w-[500px] border-2 border-dashed px-8 py-16 rounded-xl"
+                >
+                  <FileInput/>
                 </TabsContent>
               </Tabs>
               <NftForm />

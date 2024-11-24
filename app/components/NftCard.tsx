@@ -16,6 +16,7 @@ type CommunityCardProps = {
   author?: string;
   title?: string;
   price?: string;
+  actions?: boolean;
 };
 
 export default function CommunityCard({
@@ -23,22 +24,31 @@ export default function CommunityCard({
   author,
   title,
   price,
+  actions = true,
 }: CommunityCardProps) {
   return (
     <div className="relative border-1 border-white rounded-xl h-[400px] overflow-hidden group cursor-pointer">
-      <div className="absolute right-1 text-white top-4 z-10 dark">
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <HiDotsVertical />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem><MdModeEdit />Edit</DropdownMenuItem>
-            <DropdownMenuItem><MdDelete />Delete</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </div>
+      {actions && (
+        <div className="absolute right-1 text-white top-4 z-10 dark">
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <HiDotsVertical />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem>
+                <MdModeEdit />
+                Edit
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <MdDelete />
+                Delete
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
+      )}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transform transition-transform duration-500 group-hover:scale-110"
         style={{ backgroundImage: `url(${url})` }}

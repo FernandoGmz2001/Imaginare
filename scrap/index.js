@@ -7,7 +7,6 @@ const fs = require('fs');
     const context = await browser.newContext();
     const page = await context.newPage();
     await page.goto("https://rarible.com/drops");
-    await page.waitForTimeout(5000);
     for (let i = 0; i < 4; i++) {
       await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
       await page.waitForTimeout(2000); // wait for 2 seconds for the new nfts to load

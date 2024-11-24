@@ -36,7 +36,7 @@ export default function Generator() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          text: `${prompt}. Estilo pixel art 8 bit.`,
+          text: `${prompt}`,
           image_generator_versions: "standard",
           use_old_model: false,
           turbo: true,
