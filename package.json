@@ -27,7 +27,15 @@
     "react-dom": "19.0.0-rc-66855b96-20241106",
     "react-icons": "^5.3.0",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+		"@openzeppelin/contracts": "4.0.0",
+    "axios": "1.6.8",
+    "cors": "2.8.5",
+    "dotenv": "16.4.5",
+    "express": "4.21.1",
+    "find-config": "1.0.0",
+    "form-data": "4.0.1",
+    "multer": "1.4.5-lts.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.48.2",
@@ -38,6 +46,11 @@
     "eslint-config-next": "15.0.3",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+		"@nomiclabs/hardhat-ethers": "2.2.3",
+    "@playwright/test": "1.48.2",
+    "@types/node": "22.8.4",
+    "ethers": "5.7.2",
+    "hardhat": "2.22.13"
   }
 }
