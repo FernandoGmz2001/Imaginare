@@ -1,39 +1,83 @@
-import { chromium } from 'playwright';
 import { NextRequest, NextResponse } from "next/server";
+import path from 'path';
+import fs from 'fs'
+import { trimSplitAndJoin } from "@/lib/utils";
 
-export async function GET() {
-  return NextResponse.json({ message: 'Hello World' });
+const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads")
+
+if (!fs.existsSync(UPLOAD_DIR)) {
+	fs.mkdirSync(UPLOAD_DIR)
+}
+export const GET = async (req: NextRequest, res: NextResponse) => {
+	try {
+		const fileId = req.nextUrl.searchParams.get('fileId')
+		// const file = await Upload.findOne({ _id: fileId })
+		const fileBuffer = fs.readFileSync(file.filePath)
+		if (!fileBuffer) {
+			throw new Error('Archivo solicitado no encontrado.')
+		}
+		return new NextResponse(fileBuffer, {
+			headers: {
+				'Content-Type': 'application/pdf',
+				'Content-Disposition': `attachment; filename="${file.fileName}"`
+			}
+		})
+	} catch (err) {
+		console.log(err)
+		return NextResponse.json({
+			message: "error"
+		})
+	}
 }
 
-export async function POST(req: NextRequest) {
-  const prompt = await req.json();
-  try {
-    const browser = await chromium.launch();
-    const context = await browser.newContext();
-    const page = await context.newPage();
 
-    await page.goto('https://deepai.org/machine-learning-model/text2img');
-    await page.getByPlaceholder('Enter your prompt or just click generate to get inspired').fill(prompt.text);
-    await page.getByRole('button', { name: 'Generate' }).click();
-
-    let isReadyToDownload = await page.locator('#download-button').getAttribute('imagewasgenerated');
-    while (isReadyToDownload === 'False') {
-      isReadyToDownload = await page.locator('#download-button').getAttribute('imagewasgenerated');
-    }
-
-    const imageElement = await page.$('.try-it-result-area img');
-    if (imageElement == null) throw new Error("No se encontró la imagen");
-    const imageUrl = await imageElement.getAttribute('src');
-
-    await browser.close();
-
-    return NextResponse.json({ imageUrl });
-  } catch (err) {
-    if (err instanceof Error) {
-      console.log(err.stack);
-      return NextResponse.json({
-        message: err.message
-      });
-    }
-  }
+export const POST = async (req: NextRequest) => {
+	try {
+		const { searchParams } = req.nextUrl
+		const userId = searchParams.get('userId')
+		//const user = await User.findById(userId)
+		if (!userId /*||!user*/) {
+			throw new Error('Validacion: Debe de proporcionar un cliente.')
+		}
+		const formData = await req.formData()
+		console.log(typeof formData)
+		if (!formData) {
+			throw new Error('Validacion: Debe proporcionar por lo menos un archivo.')
+		}
+		const body = Object.fromEntries(formData)
+		if (!body) {
+			throw new Error('Validacion: Debe de proporcional al menos un archivo.')
+		}
+		const file = (body.file as Blob) || null
+		const directory = `${UPLOAD_DIR}/${trimSplitAndJoin()}`
+		const fileName = trimSplitAndJoin((body.file as File).name)
+		const fileFullName = path.resolve(directory, fileName)
+		if (!file) {
+			throw new Error('Validacion: Debe proporcionar un archivo.')
+		}
+		if (!fs.existsSync(directory)) {
+			fs.mkdirSync(directory)
+		}
+		const buffer = Buffer.from(await file.arrayBuffer())
+		fs.writeFileSync(
+			fileFullName,
+			buffer
+		)
+		return NextResponse.json({
+			message: 'Archivo cargado exitosamente',
+		}, {
+			status: 200
+		})
+	} catch (err) {
+		console.log(err)
+		if (err instanceof Error) {
+			return NextResponse.json({
+				err,
+				message: err.message
+			}, {
+				status: 400
+			})
+		}
+	}
 }
+
