@@ -1,8 +1,7 @@
 import { PUB_KEY, SALES_CONTRACT } from "@/lib/config";
 import hardhat from "hardhat";
-
-
 const { ethers } = hardhat;
+
 export async function createTransaction(provider,method,params){
     const etherInterface = new ethers.utils.Interface(contract.abi);
     const nonce = await provider.getTransactionCount(PUB_KEY,'latest')
