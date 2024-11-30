@@ -531,8 +531,8 @@
       ]
     },
     "/home/alanif/dev/Imaginare/contracts/User.sol": {
-      "lastModificationDate": 1732817275542,
-      "contentHash": "d40282157f541346cc2ebba9632f7efe",
+      "lastModificationDate": 1732992177682,
+      "contentHash": "365375b0cf9efa38ddbc0a6340ea68ef",
       "sourceName": "contracts/User.sol",
       "solcConfig": {
         "version": "0.8.27",
