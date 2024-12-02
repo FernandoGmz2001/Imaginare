@@ -1,22 +1,28 @@
-'use client'
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
-import { useImageContext } from "../layout";
 import { FormEvent, useState } from "react";
+import usePost from "@/app/hooks/usePost";
 
 export default function NftForm() {
-
+  const { error, postData, responseData } = usePost(
+    "http://localhost:3000/api/exchange",
+  );
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
+    postData({
+      name,
+      description
+    });
+    if(!error){
+      console.log("Todo salio bien")
+      console.log(`Respuesta: ${responseData}`)
+    }
   };
-
-  const handleChange = (data) => {
-    console.log(data)
-  }
-
 
   return (
     <>
@@ -31,7 +37,7 @@ export default function NftForm() {
             name="name"
             placeholder="Name"
             className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
-            onChange={handleChange}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="flex flex-col gap-2">
@@ -44,13 +50,14 @@ export default function NftForm() {
             id="description"
             placeholder="Description"
             className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
-            onChange={handleChange}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
+        <div></div>
         <div>
-        </div>
-        <div>
-          <Button className="bg-white text-black font-semibold" type="submit">Edit</Button>
+          <Button className="bg-white text-black font-semibold" type="submit">
+            Exchange
+          </Button>
         </div>
       </form>
     </>

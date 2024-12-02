@@ -1,6 +1,9 @@
+'use client'
 import { MdVerified } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdModeEdit, MdDelete } from "react-icons/md";
+import { FaExchangeAlt } from "react-icons/fa";
+import { useRouter } from 'next/navigation'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,6 +29,12 @@ export default function CommunityCard({
   price,
   actions = true,
 }: CommunityCardProps) {
+  const router = useRouter()
+
+  const onExchange = () => {
+    router.push('/profile/1')
+  }
+
   return (
     <div className="relative border-1 border-white rounded-xl h-[400px] overflow-hidden group cursor-pointer">
       {actions && (
@@ -37,9 +46,9 @@ export default function CommunityCard({
             <DropdownMenuContent>
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <MdModeEdit />
-                Edit
+              <DropdownMenuItem onClick={onExchange}>
+                <FaExchangeAlt />
+                Exchange
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <MdDelete />

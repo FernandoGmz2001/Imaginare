@@ -10,7 +10,7 @@ export default function Nft() {
       <Navbar activeItem="Profile" />
       <div className="py-10 flex flex-col gap-4 items-center justify-center">
         <div className="text-left">
-        <h2 className="text-h2-title text-white">Edit existing NFT</h2>
+        <h2 className="text-h2-title text-white">Exchange NFT</h2>
         </div>
         <div className="flex flex-col gap-4 w-[400px]">
           <div className="w-[400px]">
