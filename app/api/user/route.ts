@@ -1,5 +1,4 @@
 import { addNftPaths, getUserById, getUsers, insertUser } from "@/services/user";
-import { User } from "@/types/types";
 import { NextRequest, NextResponse } from "next/server";
 
 

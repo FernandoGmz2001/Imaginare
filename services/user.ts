@@ -1,6 +1,6 @@
-import { Contract, ethers, id, Wallet } from 'ethers';
+import { ethers} from 'ethers';
 import UsersAbi from '@/artifacts/contracts/User.sol/Users.json';
-import { API_URL, PRIV_KEY, PUB_KEY, USER_ADDRESS } from '@/lib/config';
+import { API_URL, PRIV_KEY, USER_ADDRESS } from '@/lib/config';
 import { User } from '@/types/types';
 
 const provider = new ethers.JsonRpcProvider(API_URL);
@@ -35,15 +35,22 @@ export const getUsers = async (): Promise<User[]> => {
     }));
 };
 
-export const getUserById = async (userId: number): Promise<User> => {
-    const user = await usersContract.getUserId(userId);
-    return {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        amountSpent: Number(user.amountSpent),
-        userId: Number(user.userId),
-        nftPaths: user.nftPaths,
-    };
+export const getUserById = async (userId: number): Promise<User | undefined> => {
+    try{
+        const user = await usersContract.getUserId(userId);
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            amountSpent: Number(user.amountSpent),
+            userId: Number(user.userId),
+            nftPaths: user.nftPaths,
+        };
+    }catch(err){
+        if(err instanceof Error){
+            throw err
+        }
+    }
+   
 };
 
 export const register = async (userId: number, amount: number): Promise<void> => {
