@@ -52,8 +52,8 @@ contract Users is Ownable {
         users[userId].amountSpent += amount;
     }
 
-    function addNftPaths(uint256 _userId, string[] memory _nftPaths) public {
+    function addNftPaths(uint256 _userId, string memory _nftPaths) public {
         require(users[_userId].userId == _userId, "User does not exist");
-        users[_userId].nftPaths = _nftPaths;
+        users[_userId].nftPaths.push(_nftPaths);
     }
 }
