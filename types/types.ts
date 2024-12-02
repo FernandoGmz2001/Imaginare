@@ -24,7 +24,7 @@ export type User = {
 	userId?: number,
 	firstName: string,
 	lastName: string,
-	nftPaths?: string[],
+	nftPaths?: number[],
 	amountSpent?: number
 }
 
@@ -41,3 +41,9 @@ export type Transaction = {
 export type Address = string
 
 export type RawUserInfo = [string, string, string, string]
+
+export type Upload = {
+	fileName: string,
+	filePath: string,
+	userId?: number
+}

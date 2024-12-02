@@ -58,7 +58,7 @@ export const register = async (userId: number, amount: number): Promise<void> =>
     await tx.wait();
 };
 
-export const addNftPaths = async (userId: number, nftPaths: string): Promise<void> => {
+export const addNftPaths = async (userId: number, nftPaths: number): Promise<void> => {
     const tx = await usersContract.addNftPaths(userId, nftPaths);
     await tx.wait();
 };

@@ -7,6 +7,7 @@ contract Uploads is Ownable {
     uint256 private _uploadIds;
 
     struct Upload {
+        uint256 uploadId;
         string fileName;
         string filePath;
         uint256 userId;
@@ -23,7 +24,7 @@ contract Uploads is Ownable {
     ) public onlyOwner returns (uint256) {
         _uploadIds++;
         uint256 newUploadId = _uploadIds;
-        uploads[newUploadId] = Upload(fileName, filePath, userId);
+        uploads[newUploadId] = Upload(newUploadId,fileName, filePath, userId);
         return newUploadId;
     }
 

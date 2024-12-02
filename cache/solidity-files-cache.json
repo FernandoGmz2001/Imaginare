@@ -760,8 +760,8 @@
       ]
     },
     "/home/alan/dev/Imaginare/contracts/Upload.sol": {
-      "lastModificationDate": 1733124190104,
-      "contentHash": "9300f4a7412ba09c3d2c3b9b79e775fc",
+      "lastModificationDate": 1733129258135,
+      "contentHash": "a9615ba84589facfe8f31d54bbfb89e1",
       "sourceName": "contracts/Upload.sol",
       "solcConfig": {
         "version": "0.8.27",
