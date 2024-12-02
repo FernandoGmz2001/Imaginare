@@ -11,7 +11,7 @@ contract Box is Ownable {
 
     event ValueChanged(uint256 value);
 
-    constructor() Ownable() {}
+    constructor() Ownable(msg.sender) {}
 
     // The onlyOwner modifier restricts who can call the store function
     function store(uint256 value) public onlyOwner {
