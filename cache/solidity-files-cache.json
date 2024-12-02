@@ -1,8 +1,8 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/home/alanif/dev/Imaginare/contracts/BoxTest.sol": {
-      "lastModificationDate": 1732916118277,
+    "/home/alan/dev/Imaginare/contracts/BoxTest.sol": {
+      "lastModificationDate": 1733102202447,
       "contentHash": "d4a2b555efa643250aaf1b02a45c6d81",
       "sourceName": "contracts/BoxTest.sol",
       "solcConfig": {
@@ -39,8 +39,8 @@
         "Box"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
-      "lastModificationDate": 1732817459898,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/access/Ownable.sol": {
+      "lastModificationDate": 1733102410572,
       "contentHash": "17d9f40220b0ab370db2c77e7c92c4ef",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -77,8 +77,8 @@
         "Ownable"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1732817459855,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1733102410426,
       "contentHash": "bc047f55d4e6dcc5a9c7ee096f530312",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -113,8 +113,8 @@
         "Context"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
-      "lastModificationDate": 1732817459879,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol": {
+      "lastModificationDate": 1733102410532,
       "contentHash": "8f1c15639d1801a8117bdc64882e710b",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -158,8 +158,8 @@
         "ERC721"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Address.sol": {
-      "lastModificationDate": 1732817459853,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Address.sol": {
+      "lastModificationDate": 1733102410406,
       "contentHash": "37103cdc416efc2601c6f6734044b559",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -194,8 +194,44 @@
         "Address"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
-      "lastModificationDate": 1732817459870,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
+      "lastModificationDate": 1733102410597,
+      "contentHash": "e575d915a7dbf0decd510699a7fd53dc",
+      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "Strings"
+      ]
+    },
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+      "lastModificationDate": 1733102410501,
       "contentHash": "a9a5319dff9088c6ffe757ea1c2a6729",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -232,10 +268,10 @@
         "ERC165"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Strings.sol": {
-      "lastModificationDate": 1732817459905,
-      "contentHash": "e575d915a7dbf0decd510699a7fd53dc",
-      "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
+      "lastModificationDate": 1733102410566,
+      "contentHash": "e6d69a0b5b95ac1112eb4746a2d66f3e",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
         "version": "0.8.27",
         "settings": {
@@ -265,11 +301,11 @@
         "^0.8.0"
       ],
       "artifacts": [
-        "Strings"
+        "IERC721Receiver"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
-      "lastModificationDate": 1732817459893,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol": {
+      "lastModificationDate": 1733102410564,
       "contentHash": "93a5aa8a276e028a4f46f22b5d8f7bd3",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -306,82 +342,8 @@
         "IERC721"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
-      "lastModificationDate": 1732817459894,
-      "contentHash": "75cedcb24edaec014d2071ed59a03ff3",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC721.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Metadata"
-      ]
-    },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol": {
-      "lastModificationDate": 1732817459895,
-      "contentHash": "e6d69a0b5b95ac1112eb4746a2d66f3e",
-      "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
-      "solcConfig": {
-        "version": "0.8.27",
-        "settings": {
-          "evmVersion": "paris",
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC721Receiver"
-      ]
-    },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
-      "lastModificationDate": 1732817459894,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol": {
+      "lastModificationDate": 1733102410565,
       "contentHash": "f2ae82a09cc670ca19d644f60990b94d",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
       "solcConfig": {
@@ -418,8 +380,46 @@
         "IERC721Enumerable"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
-      "lastModificationDate": 1732817459892,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol": {
+      "lastModificationDate": 1733102410565,
+      "contentHash": "75cedcb24edaec014d2071ed59a03ff3",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+      "solcConfig": {
+        "version": "0.8.27",
+        "settings": {
+          "evmVersion": "paris",
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../IERC721.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "IERC721Metadata"
+      ]
+    },
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+      "lastModificationDate": 1733102410561,
       "contentHash": "9a04322bb8f6b8f2767d8358d1d2537b",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -454,9 +454,9 @@
         "IERC165"
       ]
     },
-    "/home/alanif/dev/Imaginare/contracts/NFT.sol": {
-      "lastModificationDate": 1732817275542,
-      "contentHash": "c04bb6a6b8e69d5cc87c63c6e5f2fd49",
+    "/home/alan/dev/Imaginare/contracts/NFT.sol": {
+      "lastModificationDate": 1733102380779,
+      "contentHash": "aa617b89f83a05508a8e436568bf21fc",
       "sourceName": "contracts/NFT.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -494,8 +494,8 @@
         "Pixel"
       ]
     },
-    "/home/alanif/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
-      "lastModificationDate": 1732817459855,
+    "/home/alan/dev/Imaginare/node_modules/@openzeppelin/contracts/utils/Counters.sol": {
+      "lastModificationDate": 1733102410428,
       "contentHash": "86ddbfba30a7d811a86f54416c364be3",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
@@ -530,9 +530,9 @@
         "Counters"
       ]
     },
-    "/home/alanif/dev/Imaginare/contracts/User.sol": {
-      "lastModificationDate": 1732992177682,
-      "contentHash": "365375b0cf9efa38ddbc0a6340ea68ef",
+    "/home/alan/dev/Imaginare/contracts/User.sol": {
+      "lastModificationDate": 1733113578790,
+      "contentHash": "dabad8866ef9055db55e412753bfd8e6",
       "sourceName": "contracts/User.sol",
       "solcConfig": {
         "version": "0.8.27",
@@ -569,8 +569,8 @@
         "Users"
       ]
     },
-    "/home/alanif/dev/Imaginare/contracts/Sales.sol": {
-      "lastModificationDate": 1732817275542,
+    "/home/alan/dev/Imaginare/contracts/Sales.sol": {
+      "lastModificationDate": 1733102202448,
       "contentHash": "44569370f798fdd8f7461b7d35c326d5",
       "sourceName": "contracts/Sales.sol",
       "solcConfig": {
@@ -608,9 +608,9 @@
         "Sales"
       ]
     },
-    "/home/alanif/dev/Imaginare/contracts/Wallet.sol": {
-      "lastModificationDate": 1732817275542,
-      "contentHash": "5a5fd683e3e4a1cb735d7336af48e864",
+    "/home/alan/dev/Imaginare/contracts/Wallet.sol": {
+      "lastModificationDate": 1733102360774,
+      "contentHash": "a54db4c788e1f436c219b10350cc68d7",
       "sourceName": "contracts/Wallet.sol",
       "solcConfig": {
         "version": "0.8.27",
