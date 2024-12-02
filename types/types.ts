@@ -32,10 +32,10 @@ export type Transaction = {
 	nonce: number,
 	from: string,
 	to: string,
-	chainId: number,
+	chainId: bigint,
 	data: string,
-	gasLimit?: ethers.BigNumber,
-	gasPrice: ethers.BigNumber
+	gasLimit?: bigint,
+	gasPrice: bigint
 }
 
 export type Address = string
