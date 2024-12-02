@@ -1,4 +1,4 @@
-import { addNftPaths, getUserById, getUsers, insertUser } from "@/services/user";
+import { getUserById, getUsers, insertUser, register } from "@/services/user";
 import { NextRequest, NextResponse } from "next/server";
 
 
@@ -32,8 +32,8 @@ export async function GET(req:NextRequest) {
 export async function POST(req: NextRequest) {
 	try {
 		const userId = Number(req.nextUrl.searchParams.get('userId')) 
-		const {firstName, lastName, nftPath, amount} = await req.json()
-		if(!userId && !nftPath && !amount){
+		const {firstName, lastName, amount} = await req.json()
+		if(!userId && !amount){
 			const user = await insertUser(firstName, lastName)
 			return NextResponse.json({
 				user,
@@ -41,10 +41,10 @@ export async function POST(req: NextRequest) {
 			}, {
 				status: 201
 			})
-		}else if(nftPath){
-			await addNftPaths(userId, nftPath)
+		}else if(amount){
+			await register(userId, amount)
 			return NextResponse.json({
-				success: 'NFT added succesfully.'
+				success: 'Amount added succesfully.'
 			}, {
 				status: 201
 			})
@@ -61,3 +61,5 @@ export async function POST(req: NextRequest) {
 		}
 	}
 }
+
+//?
