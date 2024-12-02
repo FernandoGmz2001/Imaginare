@@ -15,25 +15,24 @@ import {
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 type CommunityCardProps = {
+  id?: number;
   url?: string;
   author?: string;
   title?: string;
   price?: string;
   actions?: boolean;
+  onExchange?: ()=> void;
 };
 
 export default function CommunityCard({
+  id,
   url,
   author,
   title,
   price,
   actions = true,
+  onExchange,
 }: CommunityCardProps) {
-  const router = useRouter()
-
-  const onExchange = () => {
-    router.push('/profile/1')
-  }
 
   return (
     <div className="relative border-1 border-white rounded-xl h-[400px] overflow-hidden group cursor-pointer">

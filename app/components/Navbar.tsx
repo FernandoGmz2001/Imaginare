@@ -24,6 +24,10 @@ export default function Navbar({
     }, 300); // Ajusta este tiempo si es necesario
   };
 
+  const onLoginSubmit = () => {
+    router.push("/login")
+  }
+
   return (
     <>
       <div
@@ -68,7 +72,7 @@ export default function Navbar({
           </p>
         </div>
         <div className="flex gap-4 ">
-          <Button className="flex gap-4 font-bold ">
+          <Button className="flex gap-4 font-bold " onClick={onLoginSubmit}>
             <MdWallet /> Login
           </Button>
           <Button className="flex gap-4 font-bold bg-grayBackground text-white hover:text-black hover:bg-white transition-colors duration-600">

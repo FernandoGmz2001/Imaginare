@@ -31,6 +31,10 @@ function Register() {
     }
   };
 
+  const onSignIn = () => {
+    router.push('/login')
+  }
+
   return (
     <div className="dark flex w-full h-screen items-center justify-center">
       <Card className="w-">
@@ -69,7 +73,7 @@ function Register() {
             Sign up
           </Button>
           <Separator />
-          <Button className="w-full">Sign in</Button>
+          <Button className="w-full" onClick={onSignIn}>Sign in</Button>
         </CardFooter>
       </Card>
     </div>

@@ -3,4 +3,5 @@ export interface Nft {
   image: string;
   autor: string;
   price: string;
+  id?: number;
 }

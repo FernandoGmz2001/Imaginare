@@ -33,6 +33,7 @@ const fs = require('fs');
       // }
 
       const nft = {
+        id: i,
         title: content,
         image: src,
         autor: autor,
