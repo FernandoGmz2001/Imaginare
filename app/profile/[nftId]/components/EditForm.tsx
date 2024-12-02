@@ -9,14 +9,12 @@ export default function NftForm() {
   const { error, postData, responseData } = usePost(
     "http://localhost:3000/api/exchange",
   );
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [contractId, setcontractId] = useState("");
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     postData({
-      name,
-      description
+      contractId
     });
     if(!error){
       console.log("Todo salio bien")
@@ -29,31 +27,17 @@ export default function NftForm() {
       <form className="flex flex-col gap-4 dark" onSubmit={handleSubmit}>
         <div className="flex flex-col gap-2">
           <Label htmlFor="name" className="text-white font-semibold">
-            Name
+            Contract Id
           </Label>
           <Input
             type="text"
-            id="name"
-            name="name"
-            placeholder="Name"
+            id="contractId"
+            name="contractId"
+            placeholder="Contract id"
             className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setcontractId(e.target.value)}
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <Label htmlFor="description" className="text-white font-semibold">
-            Description
-          </Label>
-          <Input
-            type="text"
-            name="description"
-            id="description"
-            placeholder="Description"
-            className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
-            onChange={(e) => setDescription(e.target.value)}
-          />
-        </div>
-        <div></div>
         <div>
           <Button className="bg-white text-black font-semibold" type="submit">
             Exchange

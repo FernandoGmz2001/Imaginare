@@ -7,6 +7,7 @@ type NftObject = {
   name: string;
   description: string;
   author?: string;
+  price?: number;
 };
 
 // Definir el tipo del contexto para tipar `imageObj` y `setImageObj`
@@ -28,6 +29,7 @@ export default function CreateLayout({
     url: "",
     name: "",
     description: "",
+    price: 0,
   });
 
   return (
