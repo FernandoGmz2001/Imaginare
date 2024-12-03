@@ -1,10 +1,11 @@
 import { ethers } from "ethers";
 
 export interface Nft {
-	title: string;
-	image: string;
-	autor: string;
-	price: string;
+  title: string;
+  image: string;
+  autor: string;
+  price: string;
+  id?: number;
 }
 
 export type NftPrompt = {

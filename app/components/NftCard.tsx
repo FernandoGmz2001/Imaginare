@@ -1,6 +1,9 @@
+'use client'
 import { MdVerified } from "react-icons/md";
 import { HiDotsVertical } from "react-icons/hi";
 import { MdModeEdit, MdDelete } from "react-icons/md";
+import { FaExchangeAlt } from "react-icons/fa";
+import { useRouter } from 'next/navigation'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,20 +15,25 @@ import {
 import { DropdownMenuGroup } from "@radix-ui/react-dropdown-menu";
 
 type CommunityCardProps = {
+  id?: number;
   url?: string;
   author?: string;
   title?: string;
   price?: string;
   actions?: boolean;
+  onExchange?: ()=> void;
 };
 
 export default function CommunityCard({
+  id,
   url,
   author,
   title,
   price,
   actions = true,
+  onExchange,
 }: CommunityCardProps) {
+
   return (
     <div className="relative border-1 border-white rounded-xl h-[400px] overflow-hidden group cursor-pointer">
       {actions && (
@@ -37,9 +45,9 @@ export default function CommunityCard({
             <DropdownMenuContent>
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <MdModeEdit />
-                Edit
+              <DropdownMenuItem onClick={onExchange}>
+                <FaExchangeAlt />
+                Exchange
               </DropdownMenuItem>
               <DropdownMenuItem>
                 <MdDelete />
