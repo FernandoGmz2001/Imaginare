@@ -45,5 +45,8 @@ export type RawUserInfo = [string, string, string, string]
 export type Upload = {
 	fileName: string,
 	filePath: string,
-	userId?: number
+	userId?: bigint,
+	uploadId?: bigint
 }
+
+export type RawUpload = [bigint, string, string, bigint]

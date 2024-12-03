@@ -16,7 +16,7 @@ contract Uploads is Ownable {
     mapping(uint256 => Upload) public uploads;
 
     constructor() Ownable(msg.sender) {}
-
+    event UploadInserted(uint256 uploadId, string fileName, string filePath, uint256 userId);
     function insertUpload(
         string memory fileName,
         string memory filePath,
@@ -25,6 +25,7 @@ contract Uploads is Ownable {
         _uploadIds++;
         uint256 newUploadId = _uploadIds;
         uploads[newUploadId] = Upload(newUploadId,fileName, filePath, userId);
+        emit UploadInserted(newUploadId, fileName, filePath, userId);
         return newUploadId;
     }
 
@@ -37,28 +38,24 @@ contract Uploads is Ownable {
         return uploadsArray;
     }
 
-    function getUserUploads(uint256 userId) public view returns (Upload[] memory) {
-        uint256 count;
-        // First, count how many uploads the user has
-        for (uint256 i = 1; i <= _uploadIds; i++) {
-            if (uploads[i].userId == userId) {
-                count++;
-            }
+  function getUserUploads(uint256 userId) public view returns (Upload[] memory) {
+    uint256 count = 0;
+    for (uint256 i = 1; i <= _uploadIds; i++) {
+        if (uploads[i].userId == userId) {
+            count++;
         }
-        
-        // Create an array for the user's uploads
-        Upload[] memory userUploads = new Upload[](count);
-        uint256 index = 0;
-        
-        // Now, populate the array with the user's uploads
-        for (uint256 i = 1; i <= _uploadIds; i++) {
-            if (uploads[i].userId == userId) {
-                userUploads[index] = uploads[i];
-                index++;
-            }
-        }
-        return userUploads;
     }
+
+    Upload[] memory userUploads = new Upload[](count);
+    uint256 index = 0;
+    for (uint256 i = 1; i <= _uploadIds; i++) {
+        if (uploads[i].userId == userId) {
+            userUploads[index] = uploads[i];
+            index++;
+        }
+    }
+    return userUploads;
+}
 
     function getUploadById(uint256 uploadId) public view returns (Upload memory) {
         require(uploadId > 0 && uploadId <= _uploadIds, "Upload does not exist");
