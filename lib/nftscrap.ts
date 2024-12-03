@@ -1,6 +1,14 @@
-const { chromium } ="playwright";
+import { chromium } from "@playwright/test"
+import path from "path";
+import fs from 'fs'
+import { User } from "@/types/types";
+const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads");
 
-async function scrappImage(prompt){
+console.log(UPLOAD_DIR);
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR);
+}
+export async function scrappImage(prompt: string, user: User){
 	console.log('Creando navegador...')
 	const browser = await chromium.launch()
 	const context = await browser.newContext()
@@ -30,30 +38,32 @@ async function scrappImage(prompt){
 			.click()
 		const download = await downloadPromise
 
-		await download.saveAs('./images/' + download.suggestedFilename())
+		await download.saveAs(`${UPLOAD_DIR}/${user.userId}-${user.firstName}/` + download.suggestedFilename())
 		console.log('Imagen descargada')
 		return download.suggestedFilename()
 	}catch(err){
-		throw new Error(err)
+		if(err instanceof Error){
+			throw err
+		}
 	}finally{
 		await browser.close()
 	}
 }
 
-async function scrappImageApi(prompt){
-	const data = await fetch('https://api.deepai.org/api/text2img', {
-    method: 'POST',
-    body: {
-      text: `${prompt}. Estilo pixel art 8 bit.`,
-      image_generator_versions: "standard",
-      use_old_movel: false,
-      turbo: true,
-      genius_preference: 'classic'
-    }
-	})
-  console.log(data)
-	return data.data
-}
+// async function scrappImageApi(prompt){
+// 	const data = await fetch('https://api.deepai.org/api/text2img', {
+//     method: 'POST',
+//     body: {
+//       text: `${prompt}. Estilo pixel art 8 bit.`,
+//       image_generator_versions: "standard",
+//       use_old_movel: false,
+//       turbo: true,
+//       genius_preference: 'classic'
+//     }
+// 	})
+//   console.log(data)
+// 	return data.data
+// }
 
-scrappImageApi('Una noche estrellada')
+//scrappImageApi('Una noche estrellada')
 //scrappImage('Una noche estrellada' +' estilo pixel')
