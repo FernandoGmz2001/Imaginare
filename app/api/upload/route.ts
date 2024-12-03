@@ -1,6 +1,11 @@
 import path from "path";
 import fs from "fs";
-import { getUploads, insertUpload } from "@/services/upload";
+import {
+  getUploadById,
+  getUploads,
+  getUserUploads,
+  insertUpload,
+} from "@/services/upload";
 import { NextRequest, NextResponse } from "next/server";
 import { addNftPaths, getUserById } from "@/services/user";
 import { trimSplitAndJoin } from "@/lib/utils";
@@ -13,7 +18,17 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 
 export const GET = async (req: NextRequest) => {
   try {
-    const uploads = await getUploads();
+    const { searchParams } = req.nextUrl;
+    const uploadId = Number(searchParams.get("uploadId"));
+    const userId = Number(searchParams.get("userId"));
+    let uploads;
+    if (!uploadId && !userId) {
+      uploads = await getUploads();
+    } else if (uploadId) {
+      uploads = await getUploadById(uploadId);
+    } else {
+      uploads = await getUserUploads(userId);
+    }
     return NextResponse.json({
       uploads,
     });
@@ -36,7 +51,7 @@ export const POST = async (req: NextRequest) => {
       throw new Error("Validacion: Debe de proporcionar un usuario.");
     }
     const formData = await req.formData();
-    console.log(formData)
+    console.log(formData);
     console.log(typeof formData);
     if (!formData) {
       throw new Error("Validacion: Debe proporcionar por lo menos un archivo.");
@@ -46,7 +61,7 @@ export const POST = async (req: NextRequest) => {
       throw new Error("Validacion: Debe de proporcional al menos un archivo.");
     }
     const file = (body.file as Blob) || null;
-    const directory = `${UPLOAD_DIR}/${trimSplitAndJoin(user.firstName)}`;
+    const directory = `${UPLOAD_DIR}/${trimSplitAndJoin(`${user.userId}${user.firstName}`)}`;
     const fileName = trimSplitAndJoin((body.file as File).name);
     const fileFullName = path.resolve(directory, fileName);
     if (!file) {
@@ -62,8 +77,8 @@ export const POST = async (req: NextRequest) => {
       `${directory}/${fileName}`,
       userId
     );
-    if(!newUploadId) throw new Error('Error uploading the file')
-    await addNftPaths(userId, newUploadId)
+    if (!newUploadId) throw new Error("Error uploading the file");
+    await addNftPaths(userId, newUploadId);
     return NextResponse.json(
       {
         message: "Archivo cargado exitosamente",
