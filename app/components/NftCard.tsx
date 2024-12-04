@@ -59,8 +59,9 @@ export default function CommunityCard({
       )}
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat transform transition-transform duration-500 group-hover:scale-110"
-        style={{ backgroundImage: `url(${url})` }}
+        style={{ backgroundImage: `url("/public/uploads${url}")` }}
       />
+      <p className="text-white">{url}</p>
       <div className="relative flex items-start flex-col justify-end text-white px-6 py-4 w-full h-full bg-gradient-to-b from-black/0 via-black/0 to-black/60 transition-opacity duration-500">
         <p className="text-small-text flex gap-2 items-center">
           <span className="text-red-500">

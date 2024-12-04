@@ -25,7 +25,6 @@ export default function CreateNft() {
               <Tabs defaultValue="generator" className="">
                 <TabsList>
                   <TabsTrigger value="generator">Generator</TabsTrigger>
-                  <TabsTrigger value="upload">Upload</TabsTrigger>
                 </TabsList>
                 <TabsContent
                   value="generator"

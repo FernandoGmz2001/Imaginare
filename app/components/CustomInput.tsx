@@ -37,7 +37,7 @@ const CustomInput = forwardRef<HTMLInputElement, InputProps>(
           <Input
             ref={ref} // Pasamos la ref al Input
             id={rest.id || rest.name}
-            className="bg-grayBackground text-gray-placeholder placeholder:font-semibold text-white "
+            className="bg-transparent text-gray-placeholder placeholder:font-semibold text-white "
             type={type}
             placeholder={placeholder}
             {...rest}

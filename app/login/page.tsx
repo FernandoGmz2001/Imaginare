@@ -26,26 +26,32 @@ function Login() {
   const router = useRouter();
   const [userName, setUserName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [isloading, setisLoading] = useState(false);
 
   const { toast } = useToast();
   const onSignIn = async (e: React.FormEvent) => {
+    setisLoading(true);
     e.preventDefault();
-    const response = await axios.get(`http://localhost:3000/api/user?userName=${userName}`)
-    const data: UsersResponse = await response.data
+    const response = await axios.get(
+      `http://localhost:3000/api/user?userName=${userName}`
+    );
+    const data: UsersResponse = await response.data;
     if (data) {
       if (data && data.user.length > 0) {
         setUser(data.user[0]);
+        toast({
+          title: "Sesión iniciada exitosamente",
+        });
+        setisLoading(false);
+        router.push("/home");
+        return;
       }
-      toast({
-        title: "Sesion iniciada exitosamente",
-      });
-      router.push("/home");
-      return;
     }
     toast({
-      title: "Ocurrio un error al intentar iniciar sesion",
-      description: "Intentelo de nuevo",
+      title: "Ocurrió un error al intentar iniciar sesión",
+      description: "Inténtelo de nuevo",
     });
+    setisLoading(false);
   };
 
   const onSignUp = () => {
@@ -53,39 +59,39 @@ function Login() {
   };
 
   return (
-    <div className="dark flex w-full h-screen items-center justify-center">
-      <Card className="w-">
-        <CardHeader>
-          <CardTitle>Imaginare</CardTitle>
-          <CardDescription>login</CardDescription>
-        </CardHeader>
+    <div
+      className="dark flex w-full h-screen items-center justify-center flex-col gap-6"
+      style={{ backgroundImage: 'url("/images/LoginBackground.png")' }}
+    >
+      <h2 className="text-white text-h3-with-subtitle">Imaginare</h2>
+      <Card className="bg-[#101617] p-10">
+
         <CardContent>
-          <form className="flex flex-col gap-4 dark">
-            <div className="flex flex-col gap-2">
-              <CustomInput
-                label="UserName"
-                placeholder="p.ej user.test@gmail.com"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <CustomInput
-                label="LastName"
-                placeholder="p.ej Perez"
-                value={lastName}
-                onChange={(e) => setLastName(e.target.value)}
-              />
-            </div>
-          </form>
+          <div className="flex flex-col gap-8">
+            <header>
+              <p className="text-h5-title">Sign in</p>
+              <p className="text-2xl text-gray-500">Login</p>
+            </header>
+            <form className="flex flex-col gap-6 dark w-[300px]">
+              <div className="flex flex-col gap-6">
+                <CustomInput
+                  label="Username"
+                  placeholder="p.ej user.test@gmail.com"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                />
+              </div>
+            </form>
+          </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
           <Button
-            className="w-full"
+            className="w-full bg-blue-600 text-white hover:bg-blue-500"
             type="submit"
             onClick={onSignIn}
+            disabled={isloading}
           >
-            Sign in
+            {isloading ? "Loading..." : "Sign in"}
           </Button>
           <Separator />
           <Button className="w-full" onClick={onSignUp}>
