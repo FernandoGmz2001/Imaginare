@@ -9,6 +9,8 @@ import {
 import { NextRequest, NextResponse } from "next/server";
 import { addNftPaths, getUserById } from "@/services/user";
 import { trimSplitAndJoin } from "@/lib/utils";
+import { createNFT } from "@/services/nft";
+import { NftPrompt } from "@/types/types";
 const UPLOAD_DIR = path.resolve(process.env.ROOT_PATH ?? "", "public/uploads");
 
 console.log(UPLOAD_DIR);
@@ -46,13 +48,12 @@ export const POST = async (req: NextRequest) => {
   try {
     const { searchParams } = req.nextUrl;
     const userId = Number(searchParams.get("userId"));
+    const formData = await req.formData();
     const user = await getUserById(userId);
     if (!userId || !user) {
       throw new Error("Validacion: Debe de proporcionar un usuario.");
     }
-    const formData = await req.formData();
     console.log(formData);
-    console.log(typeof formData);
     if (!formData) {
       throw new Error("Validacion: Debe proporcionar por lo menos un archivo.");
     }
@@ -60,8 +61,12 @@ export const POST = async (req: NextRequest) => {
     if (!body) {
       throw new Error("Validacion: Debe de proporcional al menos un archivo.");
     }
+    const name = body.name as string
+    const description = body.description as string
+    const address = body.address as string
+  if(!name || !description) throw new Error('You must provide metada for NFT.')
     const file = (body.file as Blob) || null;
-    const directory = `${UPLOAD_DIR}/${trimSplitAndJoin(`${user.userId}${user.firstName}`)}`;
+    const directory = `${UPLOAD_DIR}/${trimSplitAndJoin(`${user.userId}-${user.firstName}`)}`;
     const fileName = trimSplitAndJoin((body.file as File).name);
     const fileFullName = path.resolve(directory, fileName);
     if (!file) {
@@ -78,6 +83,11 @@ export const POST = async (req: NextRequest) => {
       userId
     );
     if (!newUploadId) throw new Error("Error uploading the file");
+    const nft: NftPrompt ={
+      name,
+      description
+    }
+    await createNFT(nft, address, userId, fileName)
     await addNftPaths(userId, newUploadId);
     return NextResponse.json(
       {
