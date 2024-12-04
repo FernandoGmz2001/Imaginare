@@ -37,7 +37,7 @@ export const getUsers = async (): Promise<User[]> => {
     lastName: user.lastName,
     amountSpent: Number(user.amountSpent),
     userId: Number(user.userId),
-    nftPaths: user.nftPaths,
+    nftUploadIds: user.nftUploadIds.map((id: number) => Number(id)),
   }));
 };
 
@@ -51,7 +51,7 @@ export const getUserById = async (
       lastName: user.lastName,
       amountSpent: Number(user.amountSpent),
       userId: Number(user.userId),
-      nftPaths: user.nftPaths,
+      nftUploadIds: user.nftUploadIds.map((id: number) => Number(id)),
     };
   } catch (err) {
     if (err instanceof Error) {
@@ -78,6 +78,24 @@ export const addNftPaths = async (
   } catch (err) {
     if (err instanceof Error) {
       console.log(err.stack);
+      throw err;
+    }
+  }
+};
+
+export const getUserByFirstName = async (firstName: string) => {
+  try {
+    const users = await usersContract.getUsers();
+    const allUsers: User[] = users.map((user: User) => ({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      amountSpent: Number(user.amountSpent),
+      userId: Number(user.userId),
+      nftUploadIds: user.nftUploadIds.map((id: number) => Number(id)),
+    }));
+    return allUsers.filter((user) => user.firstName === firstName);
+  } catch (err) {
+    if (err instanceof Error) {
       throw err;
     }
   }

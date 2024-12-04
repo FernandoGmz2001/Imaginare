@@ -25,7 +25,7 @@ export type User = {
 	userId?: number,
 	firstName: string,
 	lastName: string,
-	nftPaths?: number[],
+	nftUploadIds: number[],
 	amountSpent?: number
 }
 

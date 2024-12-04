@@ -1,22 +1,28 @@
-import { getUserById, getUsers, insertUser, register } from "@/services/user";
+import { getUserByFirstName, getUserById, getUsers, insertUser, register } from "@/services/user";
 import { NextRequest, NextResponse } from "next/server";
 
 
 export async function GET(req:NextRequest) {
 		try {
 		const userId = Number(req.nextUrl.searchParams.get('userId')) 
+		const userName = req.nextUrl.searchParams.get('userName')
+		if(userName){
+			return NextResponse.json({
+				user: await getUserByFirstName(userName)
+			})
+		}
 		if(!userId){
 			return NextResponse.json({
 				users: await getUsers()
 			}, {
-				status: 201
+				status: 200
 			})
 		}
 		const user = await getUserById(userId)
 		return NextResponse.json({
 			...user
 		}, {
-			status: 201
+			status: 200
 		})
 	} catch (err) {
 		if (err instanceof Error) {
