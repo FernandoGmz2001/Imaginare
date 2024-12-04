@@ -11,12 +11,11 @@ import {
   PINATA_SECRET_KEY,
   PRIV_KEY,
   PUB_KEY,
+  UPLOAD_ADDRESS,
 } from "@/lib/config";
 import { MetaData, NftPrompt, User } from "@/types/types";
 import pixelAbi from "@/artifacts/contracts/NFT.sol/Pixel.json";
-import { scrappImage } from "@/lib/nftscrap";
-import { addNftPaths, getUserById } from "./user";
-import { insertUpload } from "./upload";
+import { getUserById } from "./user";
 
 const provider = new ethers.JsonRpcProvider(API_URL);
 const signer = new ethers.Wallet(PRIV_KEY as string, provider);
@@ -28,8 +27,7 @@ const nftContract = new ethers.Contract(
   signer
 );
 
-async function createImgInfo(prompt: string, user: User) {
-  if(!user || !user.userId) throw new Error("You must provide an user")
+async function createImgInfo(absolutePath: string) {
   const authResponse = await axios.get(
     "https://api.pinata.cloud/data/testAuthentication",
     {
@@ -39,27 +37,11 @@ async function createImgInfo(prompt: string, user: User) {
       },
     }
   );
-  const pixelbitPrompt = `${prompt}. Estilo pixel art 8-bit.`;
-  const generatedImageName = await scrappImage(pixelbitPrompt, user);
-  console.log(generatedImageName);
-  if(!generatedImageName) throw new Error('Error generating the image.')
-  const absolutePath = path.resolve(`./public/uploads/${user.userId}-${user.firstName}/${generatedImageName}`);
-  console.log(`Attempting to read file from: ${absolutePath}`);
-  if (!fs.existsSync(absolutePath)) {
-    throw new Error(`File does not exist at path: ${absolutePath}`);
-  }
 
   fs.accessSync(absolutePath, fs.constants.R_OK);
   const stream = fs.createReadStream(absolutePath);
   const data = new FormData();
   data.append("file", stream);
-  const newUploadId = await insertUpload(
-    generatedImageName,
-    absolutePath,
-    user.userId,
-  );
-  if (!newUploadId) throw new Error("Error uploading the file");
-  await addNftPaths(user.userId, newUploadId);
 
   const fileResponse = await axios.post(
     "https://api.pinata.cloud/pinning/pinFileToIPFS",
@@ -136,11 +118,13 @@ async function mintNFT(
   return undefined;
 }
 
-export async function createNFT({ name, description, prompt }: NftPrompt, Address:string, userId: number) {
+export async function createNFT({ name, description}: NftPrompt, Address:string, userId: number, fileName: string) {
   try {
     const user = await getUserById(userId)
-    if(!user) throw new Error('User not exists')
-    const imgInfo = await createImgInfo(prompt, user);
+    if(!user) throw new Error('User not found')
+    const absolutePath = `./public/uploads/${user.userId}-${user.firstName}/${fileName}`
+    
+    const imgInfo = await createImgInfo(absolutePath);
 
     const metadata = {
       image: imgInfo,

@@ -11,7 +11,7 @@ export interface Nft {
 export type NftPrompt = {
 	name: string,
 	description: string,
-	prompt: string
+	prompt?: string
 }
 
 export type MetaData = {
