@@ -11,29 +11,46 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import CustomInput from "../components/CustomInput";
-import usePost from "../hooks/usePost";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
+import { useUser } from "@/contexts/UserContext";
+import { User } from "@/types/types";
+import axios from "axios";
+
+export interface UsersResponse {
+  user: User[];
+}
 
 function Login() {
-  const { error, postData, isLoading, responseData } = usePost(
-    "http://localhost:3000/api/login",
-  );
-  const router = useRouter()
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { setUser } = useUser();
+  const router = useRouter();
+  const [userName, setUserName] = useState("");
+  const [lastName, setLastName] = useState("");
 
+  const { toast } = useToast();
   const onSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
-    await postData({ email, password });
-    if (!error) {
-      router.push("/home")
-      console.log("Datos de respuesta:", responseData);
+    const response = await axios.get(`http://localhost:3000/api/user?userName=${userName}`)
+    const data: UsersResponse = await response.data
+    if (data) {
+      if (data && data.user.length > 0) {
+        setUser(data.user[0]);
+      }
+      toast({
+        title: "Sesion iniciada exitosamente",
+      });
+      router.push("/home");
+      return;
     }
+    toast({
+      title: "Ocurrio un error al intentar iniciar sesion",
+      description: "Intentelo de nuevo",
+    });
   };
 
   const onSignUp = () => {
-    router.push("/register")
-  }
+    router.push("/register");
+  };
 
   return (
     <div className="dark flex w-full h-screen items-center justify-center">
@@ -46,19 +63,18 @@ function Login() {
           <form className="flex flex-col gap-4 dark">
             <div className="flex flex-col gap-2">
               <CustomInput
-                label="User"
+                label="UserName"
                 placeholder="p.ej user.test@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
               <CustomInput
-                label="Password"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                label="LastName"
+                placeholder="p.ej Perez"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </form>
@@ -68,12 +84,13 @@ function Login() {
             className="w-full"
             type="submit"
             onClick={onSignIn}
-            disabled={isLoading}
           >
             Sign in
           </Button>
           <Separator />
-          <Button className="w-full" onClick={onSignUp}>Sign up</Button>
+          <Button className="w-full" onClick={onSignUp}>
+            Sign up
+          </Button>
         </CardFooter>
       </Card>
     </div>

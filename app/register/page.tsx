@@ -13,27 +13,36 @@ import { Button } from "@/components/ui/button";
 import CustomInput from "../components/CustomInput";
 import usePost from "../hooks/usePost";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 function Register() {
   const { error, postData, isLoading, responseData } = usePost(
-    "http://localhost:3000/api/register",
+    "http://localhost:3000/api/user",
   );
-  const router = useRouter()
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { toast } = useToast();
+  const router = useRouter();
+  const [userName, setUserName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const onSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    await postData({ email, password });
+    await postData({ firstName: userName, lastName });
     if (!error) {
-      router.push("/home")
-      console.log("Datos de respuesta:", responseData);
+      toast({
+        title: "Usuario creado exitosamente",
+      });
+      router.push("/login");
+      return;
     }
+    toast({
+      title: "Ocurrio un error en la creacion del usuario",
+      description: "Intentelo de nuevo",
+    });
   };
 
   const onSignIn = () => {
-    router.push('/login')
-  }
+    router.push("/login");
+  };
 
   return (
     <div className="dark flex w-full h-screen items-center justify-center">
@@ -46,19 +55,18 @@ function Register() {
           <form className="flex flex-col gap-4 dark">
             <div className="flex flex-col gap-2">
               <CustomInput
-                label="User"
+                label="UserName"
                 placeholder="p.ej user.test@gmail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={userName}
+                onChange={(e) => setUserName(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
               <CustomInput
-                label="Password"
-                placeholder="Password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                label="LastName"
+                placeholder="p.ej Perez"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </form>
@@ -73,7 +81,9 @@ function Register() {
             Sign up
           </Button>
           <Separator />
-          <Button className="w-full" onClick={onSignIn}>Sign in</Button>
+          <Button className="w-full" onClick={onSignIn}>
+            Sign in
+          </Button>
         </CardFooter>
       </Card>
     </div>

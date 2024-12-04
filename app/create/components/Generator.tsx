@@ -30,13 +30,13 @@ export default function Generator() {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/nft', {
+      const response = await fetch('/api/nft/generate', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          text: `${prompt}`,
+          text: `${prompt}. Estilo pixel art 8 bit.`,
           image_generator_versions: "standard",
           use_old_model: false,
           turbo: true,
@@ -51,8 +51,8 @@ export default function Generator() {
       const data = await response.json();
       const newImageObj = {
         url: data.imageUrl,
-        name: imageObj.name, // Mantén el nombre actual
-        description: imageObj.description, // Mantén la descripción actual
+        name: imageObj.name, 
+        description: imageObj.description, 
       };
       setImageObj(newImageObj);
       console.log("Updated imageObj:", newImageObj);

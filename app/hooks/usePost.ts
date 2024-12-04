@@ -11,17 +11,23 @@ const usePost = (url: string) => {
       setIsLoading(true);
       setError(null);
       const response = await axios.post(url, postData);
-      setResponseData(response.data);
+      if (response.status >= 200 && response.status < 300) {
+        setResponseData(response.data);
+      } else {
+        setError(`Request failed with status code ${response.status}`);
+      }
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);
+      } else {
+        setError("An unknown error occurred");
       }
     } finally {
       setIsLoading(false);
     }
   };
 
-  return { isLoading, error, responseData , postData };
+  return { isLoading, error, responseData, postData };
 };
 
 export default usePost;

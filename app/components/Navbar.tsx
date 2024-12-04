@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { FaBagShopping } from "react-icons/fa6";
 import { MdWallet } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/contexts/UserContext";
 
 export default function Navbar({
   activeItem,
@@ -12,6 +13,7 @@ export default function Navbar({
   hasBackground?: boolean;
 }) {
   const router = useRouter();
+  const { user } = useUser();
 
   const handleNavigation = (path: string, sectionId?: string) => {
     router.push(path);
@@ -25,8 +27,8 @@ export default function Navbar({
   };
 
   const onLoginSubmit = () => {
-    router.push("/login")
-  }
+    router.push("/login");
+  };
 
   return (
     <>
@@ -71,10 +73,14 @@ export default function Navbar({
             Create
           </p>
         </div>
-        <div className="flex gap-4 ">
-          <Button className="flex gap-4 font-bold " onClick={onLoginSubmit}>
-            <MdWallet /> Login
-          </Button>
+        <div className="flex gap-4 items-center">
+          {user == null ? (
+            <Button className="flex gap-4 font-bold " onClick={onLoginSubmit}>
+              <MdWallet /> Login
+            </Button>
+          ) : (
+            <p className="text-white">{user?.firstName}</p>
+          )}
           <Button className="flex gap-4 font-bold bg-grayBackground text-white hover:text-black hover:bg-white transition-colors duration-600">
             <FaBagShopping />
           </Button>
